@@ -1,23 +1,9 @@
 const { Octokit } = require('@octokit/rest');
 const got = require('got');
+const { GITHUB_TOKEN } = require('../config');
 
 const userAgent = `Kaffe Overseer v${require('../../package.json').version}`;
-const github = new Octokit({ userAgent, auth: process.env.GITHUB_TOKEN });
-
-// async function run2() {
-//   const { body } = await got('https://wakatime.com/api/v1/users/current/summaries', {
-//     headers: {
-//       Authorization: `Basic ${Buffer.from(process.env.WAKATIME_TOKEN).toString('base64')}`,
-//       'User-Agent': userAgent,
-//     },
-//     searchParams: {
-//       range: 'Today',
-//     },
-//     responseType: 'json',
-//   });
-
-//   log(body);
-// }
+const github = new Octokit({ userAgent, auth: GITHUB_TOKEN });
 
 module.exports = class Github {
   static async getUser() {

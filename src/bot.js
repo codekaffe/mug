@@ -1,13 +1,14 @@
 const { BotClient, defaultCommands } = require('sensum');
 
 const { Intents } = require('discord.js');
+const { DISCORD_TOKEN } = require('./config');
 
 const intents = new Intents();
 intents.add(Intents.NON_PRIVILEGED, Intents.FLAGS.GUILD_PRESENCES);
 
 const bot = new BotClient(
   {
-    token: process.env.DISCORD_TOKEN,
+    token: DISCORD_TOKEN,
     root: __dirname,
     debug: true,
     ownerID: '517599684961894400',

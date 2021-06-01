@@ -1,9 +1,10 @@
 const got = require('got');
+const { WAKATIME_TOKEN } = require('../config');
 
 const userAgent = `Kaffe Overseer v${require('../../package.json').version}`;
 
 const headers = {
-  Authorization: `Basic ${Buffer.from(process.env.WAKATIME_TOKEN).toString('base64')}`,
+  Authorization: `Basic ${Buffer.from(WAKATIME_TOKEN).toString('base64')}`,
   'User-Agent': userAgent,
 };
 
