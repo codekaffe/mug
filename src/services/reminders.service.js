@@ -34,11 +34,15 @@ module.exports = class Reminders {
     if (!channel) {
       // await dm();
     } else {
+      // TODO: get the actual user
+      const kaffe = bot.guilds.cache
+        .get('683463960501944327')
+        .members.cache.get('517599684961894400');
       await channel.send(
         bot.lines(
           `📆 **Reminder**`,
           reminder.content,
-          `- You, ${moment(reminder.createdAt).calendar()}`,
+          `- ${kaffe}, ${moment(reminder.createdAt).calendar()}`,
         ),
       );
     }
