@@ -1,8 +1,9 @@
-const { Command } = require('sensum');
+const { Command, Task } = require('sensum');
 const moment = require('moment');
 
 const Time = require('../../services/time.service');
 const Reminder = require('../../models/reminder.model');
+const Reminders = require('../../services/reminders.service');
 
 module.exports = new Command({
   name: 'remind',
@@ -38,8 +39,11 @@ module.exports = new Command({
       .add(duration / 1000, 'seconds');
 
     const reminder = new Reminder({ content, userId, channel, fireDate });
+    console.log('reminder: ', reminder);
 
     await reminder.save();
+
+    Reminders.scheduleReminder(bot, reminder);
 
     this.send(
       `Okay! I'll remind you **${Time.fromNow(

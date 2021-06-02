@@ -4,6 +4,7 @@ const m = require('moment');
 
 const Reminder = require('../models/reminder.model');
 const config = require('../config');
+const Reminders = require('../services/reminders.service');
 const moment = (...args) => m(...args).tz('America/Sao_Paulo');
 
 module.exports = async (bot) => {
@@ -12,32 +13,7 @@ module.exports = async (bot) => {
   }
 
   const reminders = await Reminder.find({}).limit(5).sort('fireDate');
-  for (const reminder of reminders) {
-    console.log('Scheduling', `Reminder-${reminder.userId}-${reminder._id}`);
-    bot.schedule.create(
-      bot,
-      new Task({
-        name: `Reminder-${reminder.userId}-${reminder._id}`,
-        time: reminder.fireDate,
-        async run(bot) {
-          console.log('run: ', reminder.content);
-          const channel = await bot.channels.fetch(reminder.channel);
-          if (!channel) {
-            // await dm();
-          } else {
-            await channel.send(
-              bot.lines(
-                `📆 **Reminder**`,
-                reminder.content,
-                `- You, ${moment(reminder.createdAt).calendar()}`,
-              ),
-            );
-          }
-          await reminder.delete();
-        },
-      }),
-    );
-  }
+  Reminders.scheduleSavedReminders(bot, reminders);
 };
 
 const wait = (milliseconds) => new Promise((r) => setTimeout(r, milliseconds));
