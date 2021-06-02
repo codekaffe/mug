@@ -11,10 +11,10 @@ module.exports = class Github {
     return user.data;
   }
 
-  static async getRepos() {
+  static async getRepos(limit = 1000) {
     const repos = await github.repos.listForAuthenticatedUser({
       username: 'joaquimnet',
-      per_page: 1000,
+      per_page: limit || 1000, // in case of undefined null NaN or 0
       type: 'owner',
       sort: 'updated',
     });
