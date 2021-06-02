@@ -1,4 +1,5 @@
 const { Task } = require('sensum');
+const { MessageEmbed } = require('discord.js');
 
 const Github = require('../services/github.service');
 const Wakatime = require('../services/wakatime.service');
@@ -18,18 +19,7 @@ module.exports = new Task({
     const summaries = await Wakatime.getSummaries();
 
     const wakatimeReport = bot.lines(
-      `📆 **Today's Summary** ${moment().tz('America/Sao_Paulo').format('MMMM Do, YYYY')}`,
-      '',
-      `Total coding time: ${summaries.cummulative_total.text}`,
-      '',
-      '⌨ **Editors**',
-      ...(summaries.data[0]?.editors.map((e) => `◽ ${e.digital}  ${e.name}`) ?? ['---']),
-      '',
-      '🔤 **Languages**',
-      ...(summaries.data[0]?.languages.map((l) => `◽ ${l.digital}  ${l.name}`) ?? ['---']),
-      '',
-      '📚 **Projects**',
-      ...(summaries.data[0]?.projects.map((p) => `◽ ${p.digital}  ${p.name}`) ?? ['---']),
+      `Total coding time: ${summaries.cummulative_total.text} (${summaries.cummulative_total.digital})`,
     );
 
     const githubReport = bot.lines(
@@ -40,8 +30,43 @@ module.exports = new Task({
         ),
     );
 
-    channel.send(bot.lines(wakatimeReport, '', '📊 **Recent Projects**', githubReport), {
-      split: true,
+    const wakatimeDataFormatter = (data) => {
+      return (
+        data?.filter((e) => e.total_seconds > 120).map((e) => `◽ ${e.digital}  ${e.name}`) ?? [
+          '---',
+        ]
+      ).join('\n');
+    };
+
+    const embed = new MessageEmbed({
+      title: `📆 **Today's Summary** (${moment().tz('America/Sao_Paulo').format('MMMM Do, YYYY')})`,
+      description: wakatimeReport,
+      fields: [
+        {
+          name: '⌨ **Editors**',
+          inline: true,
+          value: wakatimeDataFormatter(summaries.data[0]?.editors),
+        },
+        {
+          name: '🔤 **Languages**',
+          inline: true,
+          value: wakatimeDataFormatter(summaries.data[0]?.languages),
+        },
+        {
+          name: '📚 **Projects**',
+          inline: true,
+          value: wakatimeDataFormatter(summaries.data[0]?.projects),
+        },
+        {
+          name: '📊 **Recent Projects**',
+          inline: true,
+          value: githubReport,
+        },
+      ],
+    });
+
+    channel.send({
+      embed,
     });
   },
 });
