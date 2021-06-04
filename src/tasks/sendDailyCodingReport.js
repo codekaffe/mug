@@ -7,7 +7,7 @@ const Wakatime = require('../services/wakatime.service');
 const moment = require('moment');
 
 module.exports = new Task({
-  name: 'Send Daily Report',
+  name: 'Send Daily Coding Report',
   time: '0 0 22 * * *',
   async run(bot, fireDate) {
     const channel = bot.guilds.cache
