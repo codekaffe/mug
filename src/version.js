@@ -5,6 +5,11 @@ const path = require('path');
 
 const calculateVersion = () =>
   new Promise((resolve, reject) => {
+    if (fs.existsSync(path.resolve(__dirname, '..', 'version.txt'))) {
+      resolve(JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'version.txt'), 'utf-8')));
+      return;
+    }
+
     glob(
       './**/*.+(js|ts|json)',
       { cwd: path.resolve(__dirname, '..'), ignore: '/node_modules/' },
