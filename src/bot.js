@@ -12,6 +12,9 @@ const bot = new BotClient(
     root: __dirname,
     debug: true,
     ownerID: '517599684961894400',
+    defaultSettings: {
+      prefix: process.env.NODE_ENV === 'production' ? '!' : '>',
+    }
   },
   {
     ws: {
