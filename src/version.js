@@ -41,8 +41,8 @@ var versionNames =
     ' ',
   );
 
-if (process.argv.length > 4) {
-  calculateVersion().then(console.log);
+if (process.argv.length > 2) {
+  calculateVersion().then((versions) => console.log(JSON.stringify(versions)));
 }
 
 module.exports = calculateVersion;
