@@ -16,6 +16,7 @@
     "construe": "^0.4.1",
     "cronstrue": "^1.113.0",
     "discord.js": "^12.5.3",
+    "glob": "^7.1.7",
     "got": "^11.8.2",
     "human-to-cron": "^0.3.1",
     "moment": "^2.29.1",
