@@ -6,7 +6,12 @@ module.exports = new Command({
   description: 'Wakatime summaries.',
   category: 'code',
   aliases: ['sum'],
-  args: ['category'],
+  args: {
+    category: {
+      type: 'string',
+      optional: true,
+    },
+  },
   delete: false,
   hidden: true,
   async run(bot, message, ctx) {

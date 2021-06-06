@@ -10,7 +10,13 @@ module.exports = new Command({
   description: 'Have Overseer remind you about something at a set time.',
   category: 'organization',
   aliases: ['rem'],
-  args: ['time'],
+  args: {
+    time: 'string',
+    message: {
+      type: 'string',
+      optional: true,
+    },
+  },
   delete: false,
   hidden: false,
   usage: '{time} [your reminder]',
@@ -21,7 +27,7 @@ module.exports = new Command({
     '20min time to go get the laundry',
   ],
   async run(bot, message, ctx) {
-    const { duration } = Time.parse(ctx.args.shift());
+    const { duration } = Time.parse(ctx.args.time);
 
     if (!duration) {
       await this.send(
@@ -30,7 +36,7 @@ module.exports = new Command({
       return;
     }
 
-    const content = ctx.args.join(' ').trim() || 'this moment';
+    const content = ctx.cliArgs._.slice(1).join(' ').trim() || 'this moment';
     const userId = message.author.id;
     const channel = message.channel.id;
 
@@ -39,7 +45,6 @@ module.exports = new Command({
       .add(duration / 1000, 'seconds');
 
     const reminder = new Reminder({ content, userId, channel, fireDate });
-    console.log('reminder: ', reminder);
 
     await reminder.save();
 

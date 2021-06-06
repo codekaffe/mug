@@ -8,12 +8,18 @@ module.exports = new Command({
   description: 'Get repo data.',
   category: 'code',
   aliases: ['repo'],
-  // args: ['limit'],
+  args: {
+    limit: {
+      type: 'number',
+      default: 5,
+      convert: true,
+    },
+  },
   delete: false,
   hidden: true,
   async run(bot, message, ctx) {
-    const [limit] = ctx.args;
-    const repos = await Github.getRepos(Number(limit));
+    const limit = ctx.args.limit;
+    const repos = await Github.getRepos(limit);
     this.send(
       bot.lines(
         ...repos
