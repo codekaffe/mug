@@ -6,8 +6,10 @@ const path = require('path');
 const calculateVersion = () =>
   new Promise((resolve, reject) => {
     if (fs.existsSync(path.resolve(__dirname, '..', 'version.txt'))) {
-      resolve(JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'version.txt'), 'utf-8')));
-      return;
+      try {
+        resolve(JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'version.txt'), 'utf-8')));
+        return;
+      } catch (err) {}
     }
 
     glob(
@@ -47,7 +49,9 @@ var versionNames =
   );
 
 if (process.argv.length > 2) {
-  calculateVersion().then((versions) => console.log(JSON.stringify(versions)));
+  calculateVersion().then((versions) => {
+    console.log(JSON.stringify(versions));
+  });
 }
 
 module.exports = calculateVersion;
