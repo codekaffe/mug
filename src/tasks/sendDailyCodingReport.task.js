@@ -8,7 +8,7 @@ const moment = require('moment');
 
 module.exports = new Task({
   name: 'Send Daily Coding Report',
-  time: '0 0 22 * * *',
+  time: '0 0 24 * * *',
   async run(bot, fireDate) {
     const channel = bot.guilds.cache
       .get('683463960501944327')

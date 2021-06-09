@@ -2,7 +2,7 @@ const { Task } = require('sensum');
 
 module.exports = new Task({
   name: 'Send Memory Report',
-  time: '0 */30 * * * *',
+  time: '0 0 */1 * * *',
   run(bot, fireDate) {
     const channel = bot.guilds.cache
       .get('683463960501944327')
