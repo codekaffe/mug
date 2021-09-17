@@ -28,11 +28,16 @@ module.exports = new EventHandler({
 
     const reminders = await Reminder.find({}).limit(5).sort('fireDate');
     Reminders.scheduleSavedReminders(bot, reminders);
+
+    const todoableChannels = ['888472757900288090', '683463960946933784', '685004769999585326'];
     const todosChannel = bot.guilds.cache
       .get('683463960501944327')
       .channels.cache.get('888472757900288090');
-    if (todosChannel instanceof TextChannel) {
-      await todosChannel.messages.fetch({}, true, true);
+    for (const tdc of todoableChannels) {
+      const c = bot.guilds.cache.get('683463960501944327').channels.cache.get(tdc);
+      if (c instanceof TextChannel && todoableChannels.includes(c.id)) {
+        const f = await c.messages.fetch({ limit: 99 }, true, true).catch(console.log);
+      }
     }
   },
 });
