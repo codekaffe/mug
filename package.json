@@ -21,7 +21,7 @@
     "human-to-cron": "^0.3.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
-    "mongoose": "^5.12.12",
+    "mongoose": "^6.0.0",
     "parse-duration": "^1.0.0",
     "sensum": "^0.7.0",
     "tinv": "^1.0.1"
