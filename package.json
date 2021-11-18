@@ -23,7 +23,7 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.12",
     "parse-duration": "^1.0.0",
-    "sensum": "^0.7.0",
+    "sensum": "^0.11.0",
     "tinv": "^1.0.1"
   },
   "devDependencies": {
