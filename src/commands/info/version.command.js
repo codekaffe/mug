@@ -6,7 +6,7 @@ let versionsCache;
 
 module.exports = new Command({
   name: 'version',
-  description: "Shows Overseer's version.",
+  description: "Shows The bot's version.",
   category: 'info',
   aliases: ['ver'],
   async run(bot, message, ctx) {
@@ -18,7 +18,7 @@ module.exports = new Command({
 
     this.send(
       bot.lines(
-        `**Overseer** v${bot.version}-${versionNumber}-${versionName}`,
+        `**Alice** v${bot.version}-${versionNumber}-${versionName}`,
         `**Sensum**   v${require('sensum/package.json').version}`,
         `**Node**        ${process.version}`,
       ),

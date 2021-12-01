@@ -7,7 +7,7 @@ const Reminders = require('../../services/reminders.service');
 
 module.exports = new Command({
   name: 'remind',
-  description: 'Have Overseer remind you about something at a set time.',
+  description: 'Have Alice remind you about something at a set time.',
   category: 'organization',
   aliases: ['rem'],
   args: {

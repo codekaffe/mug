@@ -1,5 +1,6 @@
 const { Task } = require('sensum');
 const { MessageEmbed } = require('discord.js');
+const { format } = require('date-fns');
 
 const Github = require('../services/github.service');
 const Wakatime = require('../services/wakatime.service');
@@ -39,7 +40,9 @@ module.exports = new Task({
     };
 
     const embed = new MessageEmbed({
-      title: `📆 **Today's Summary** (${moment().tz('America/Sao_Paulo').format('MMMM Do, YYYY')})`,
+      title: `📆 **Today's Summary** (${moment()
+        .tz('America/Sao_Paulo')
+        .format('MMMM Do, YYYY')}, ${format(new Date(), 'eeee')})`,
       description: wakatimeReport,
       fields: [
         {

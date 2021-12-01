@@ -2,7 +2,7 @@ const { Octokit } = require('@octokit/rest');
 const got = require('got');
 const { GITHUB_TOKEN } = require('../config');
 
-const userAgent = `Kaffe Overseer v${require('../../package.json').version}`;
+const userAgent = `Alice Mug v${require('../../package.json').version}`;
 const github = new Octokit({ userAgent, auth: GITHUB_TOKEN });
 
 module.exports = class Github {
