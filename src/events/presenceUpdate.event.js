@@ -1,4 +1,4 @@
-const { EventHandler } = require('sensum');
+const { EventHandler, TextHelpers } = require('sensum');
 const moment = require('moment');
 
 const statuses = {
@@ -38,7 +38,7 @@ module.exports = new EventHandler({
     presence.guild.channels.cache
       .get('848722636565381140')
       .send(
-        bot.lines(
+        TextHelpers.lines(
           `[${moment().tz('America/Sao_Paulo').format('MM/DD/YY hh:mma')}] ${
             emoji ?? statuses[status] ?? '🏐'
           } **${status.toUpperCase()}** ${activity ? '- ' + activity : ''}`,

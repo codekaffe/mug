@@ -1,4 +1,4 @@
-const { Task } = require('sensum');
+const { Task, TextHelpers } = require('sensum');
 const { MessageEmbed } = require('discord.js');
 const { format } = require('date-fns');
 
@@ -19,11 +19,11 @@ module.exports = new Task({
 
     const summaries = await Wakatime.getSummaries();
 
-    const wakatimeReport = bot.lines(
+    const wakatimeReport = TextHelpers.lines(
       `Total coding time: ${summaries.cummulative_total.text} (${summaries.cummulative_total.digital})`,
     );
 
-    const githubReport = bot.lines(
+    const githubReport = TextHelpers.lines(
       ...repos
         .map((repo) => ({ name: repo.name, lastUpdate: repo.updated_at }))
         .map(

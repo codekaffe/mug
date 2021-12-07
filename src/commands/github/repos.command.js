@@ -1,4 +1,4 @@
-const { Command } = require('sensum');
+const { Command, TextHelpers } = require('sensum');
 const moment = require('moment');
 
 const Github = require('../../services/github.service');
@@ -21,7 +21,7 @@ module.exports = new Command({
     const limit = ctx.args.limit;
     const repos = await Github.getRepos(limit);
     this.send(
-      bot.lines(
+      TextHelpers.lines(
         ...repos
           .map((repo) => ({ name: repo.name, lastUpdate: repo.updated_at }))
           .map((r) => `**📄 ${r.name}**  📆 ${moment(r.lastUpdate).fromNow()}`),

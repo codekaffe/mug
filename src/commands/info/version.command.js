@@ -1,4 +1,4 @@
-const { Command } = require('sensum');
+const { Command, TextHelpers } = require('sensum');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,7 +17,7 @@ module.exports = new Command({
     const { versionName, versionNumber } = versionsCache;
 
     this.send(
-      bot.lines(
+      TextHelpers.lines(
         `**Alice** v${bot.version}-${versionNumber}-${versionName}`,
         `**Sensum**   v${require('sensum/package.json').version}`,
         `**Node**        ${process.version}`,
