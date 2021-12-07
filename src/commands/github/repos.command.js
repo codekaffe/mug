@@ -20,7 +20,7 @@ module.exports = new Command({
   async run(bot, message, ctx) {
     const limit = ctx.args.limit;
     const repos = await Github.getRepos(limit);
-    this.send(
+    message.channel.send(
       TextHelpers.lines(
         ...repos
           .map((repo) => ({ name: repo.name, lastUpdate: repo.updated_at }))

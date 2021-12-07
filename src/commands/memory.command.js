@@ -9,7 +9,7 @@ module.exports = new Command({
   run(bot, message, ctx) {
     const memory = bot.memory;
     console.log('memory: ', memory);
-    this.send(
+    message.channel.send(
       '```\n' +
         JSON.stringify(
           {

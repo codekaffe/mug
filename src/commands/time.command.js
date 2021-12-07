@@ -16,7 +16,7 @@ module.exports = new Command({
 
     const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-    this.send({
+    message.channel.send({
       embed: new MessageEmbed({
         title: 'Timing Parser',
         fields: [

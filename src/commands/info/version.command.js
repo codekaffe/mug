@@ -16,7 +16,7 @@ module.exports = new Command({
     versionsCache = versionFile;
     const { versionName, versionNumber } = versionsCache;
 
-    this.send(
+    message.channel.send(
       TextHelpers.lines(
         `**Alice** v${bot.version}-${versionNumber}-${versionName}`,
         `**Sensum**   v${require('sensum/package.json').version}`,

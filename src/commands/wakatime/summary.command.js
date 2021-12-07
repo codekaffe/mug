@@ -17,7 +17,7 @@ module.exports = new Command({
   async run(bot, message, ctx) {
     const summaries = await Wakatime.getSummaries();
 
-    this.send(
+    message.channel.send(
       bot.lines(
         "📆 **Today's Summary**",
         `Total coding time: ${summaries.cummulative_total.text}`,
